@@ -13,13 +13,9 @@ pipeline {
         stage('Run tests') {
             parallel {
                 stage('Test run 1') {
-                    steps {
-                    }
                 }
 
                 stage('Test run 2') {
-                    steps {
-                    }
                 }
             }
         }
