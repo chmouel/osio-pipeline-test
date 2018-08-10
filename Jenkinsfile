@@ -5,13 +5,13 @@ pipeline {
   stages {
     stage('Test init') {
       steps {
-        script {
+        //script {
           openshift.withCluster() {
             openshift.withProject() {
               openshift.selector( 'dc', [ environment:'qe' ] ).delete()
             }
           }
-        }
+        //}
       }
     }
   }
