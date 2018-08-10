@@ -17,6 +17,7 @@ pipeline {
 
             openshift.withProject("${currentUser}") {
               openshift.selector( 'dc', [ environment:'osio-pipeline-test' ] ).delete()
+              openshift.create(readYAML( 'osio-pipeline-build.yaml' ))
             }
           }
         }
