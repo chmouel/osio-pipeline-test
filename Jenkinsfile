@@ -12,9 +12,10 @@ pipeline {
       steps {
         script {
           openshift.withCluster() {
-            echo "Hello from ${openshift.cluster()}'s default project: ${openshift.project()} User ${currentUser()}"
+            def currentUser = currentUser()
+            echo "Hello from ${openshift.cluster()}'s default project: ${openshift.project()} User ${currentUser}"
 
-            openshift.withProject() {
+            openshift.withProject("${currentUser}") {
               openshift.selector( 'dc', [ environment:'osio-pipeline-test' ] ).delete()
             }
           }
