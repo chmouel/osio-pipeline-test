@@ -6,7 +6,7 @@ pipeline {
         stage('Test init') {
             steps {
                 script {
-                    openshift.setLockName(${var-name-that-ideally-includes-job-name-and-run-number})
+                    openshift.setLockName("TEST123456")
                 }
             }
         }
