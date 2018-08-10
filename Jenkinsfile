@@ -6,7 +6,7 @@ def currentUser() {
 
 
 pipeline {
-  agent none
+  agent any;
   stages {
     stage('Test init') {
       steps {
