@@ -10,14 +10,5 @@ pipeline {
                 }
             }
         }
-        stage('Run tests') {
-            parallel {
-                stage('Test run 1') {
-                }
-
-                stage('Test run 2') {
-                }
-            }
-        }
     }
 }
