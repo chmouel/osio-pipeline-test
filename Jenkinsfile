@@ -10,6 +10,8 @@ pipeline {
   stages {
     stage('Test init') {
       steps {
+        checkout scm;
+
         script {
           openshift.withCluster() {
             def currentUser = currentUser()
@@ -17,7 +19,7 @@ pipeline {
 
             openshift.withProject("${currentUser}") {
               openshift.selector( 'dc', [ environment:'osio-pipeline-test' ] ).delete()
-              openshift.create(readYAML( 'osio-pipeline-build.yaml' ))
+              openshift.create(readYaml( 'osio-pipeline-build.yaml' ))
             }
           }
         }
