@@ -8,7 +8,7 @@ def currentUser() {
 pipeline {
   agent any;
   stages {
-    stage('Test init') {
+    stage('Init') {
       steps {
         script {
           openshift.withCluster() {
@@ -16,10 +16,13 @@ pipeline {
             echo "Hello from ${openshift.cluster()}'s default project: ${openshift.project()} User ${currentUser}"
 
             openshift.withProject("${currentUser}") {
+              echo "Cleaning up old resources"
               openshift.selector( 'dc', [ environment:'osio-pipeline-test' ] ).delete()
+
+              echo "Creating Bootstrap pipeline"
               openshift.apply(
                 openshift.process(
-                  readYaml( file: 'osio-pipeline-build.yaml'),
+                  "-f", "osio-pipeline-build.yaml",
                   "-p",  "MEMORY_LIMIT=600Mi"
                 )
               )
