@@ -4,11 +4,7 @@ pipeline {
     agent none
     stages {
         stage('Test init') {
-            steps {
-                script {
-                    openshift.setLockName("TEST123456")
-                }
-            }
+          openshift.selector( 'dc', [ environment:'qe' ] ).delete()
         }
     }
 }
