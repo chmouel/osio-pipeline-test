@@ -20,7 +20,7 @@ pipeline {
               openshift.selector( 'dc', [ environment:'osio-pipeline-test' ] ).delete()
 
               echo "Creating Bootstrap pipeline"
-              openshift.apply(
+              openshift.create(
                 openshift.process(
                   "-f", "osio-pipeline-build.yaml",
                   "-p",  "MEMORY_LIMIT=600Mi"
