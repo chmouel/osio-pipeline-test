@@ -17,9 +17,11 @@ pipeline {
 
             openshift.withProject("${currentUser}") {
               openshift.selector( 'dc', [ environment:'osio-pipeline-test' ] ).delete()
-              openshift.process(
-                readYaml( file: 'osio-pipeline-build.yaml'),
-                         "-p",  "MEMORY_LIMIT=600Mi"
+              openshift.apply(
+                openshift.process(
+                  readYaml( file: 'osio-pipeline-build.yaml'),
+                  "-p",  "MEMORY_LIMIT=600Mi"
+                )
               )
             }
           }
