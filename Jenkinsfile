@@ -1,20 +1,35 @@
-def jobTimeoutHours = 1
-
-try {
-  timestamps{
-    timeout(time: jobTimeoutHours, unit: 'HOURS') {
-      node {
-        stage('Build') {
-          openshiftBuild(buildConfig: "openshift-build-test", showBuildLogs: 'true')
+pipeline {
+    agent none
+    stages {
+        stage('Test init') {
+            steps {
+                script {
+                    openshift.setLockName(${var-name-that-ideally-includes-job-name-and-run-number})
+                }
+            }
         }
-      }
+        stage('Run tests') {
+            parallel {
+                stage('Test run 1') {
+                    steps {
+                        script {
+                            openshift.withCluster(...) {
+                            ...
+                            }
+                        }
+                    }
+                }
+      
+                stage('Test run 2') {
+                    steps {
+                        script {
+                            openshift.withCluster(...) {
+                            ...
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
-  }
-} catch (err) {
-  echo "in catch block"
-  echo "Caught: ${err}"
-  currentBuild.result = 'FAILURE'
-  throw err
 }
-
-# vim: ft=groovy
