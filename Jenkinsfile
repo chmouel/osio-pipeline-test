@@ -5,13 +5,15 @@ pipeline {
   stages {
     stage('Test init') {
       steps {
-        //script {
+        script {
           openshift.withCluster() {
+            echo "Hello from ${openshift.cluster()}'s default project: ${openshift.project()}"
+
             openshift.withProject() {
-              openshift.selector( 'dc', [ environment:'qe' ] ).delete()
+              openshift.selector( 'dc', [ environment:'osio-pipeline-test' ] ).delete()
             }
           }
-        //}
+        }
       }
     }
   }
