@@ -10,8 +10,6 @@ pipeline {
   stages {
     stage('Test init') {
       steps {
-        checkout scm;
-
         script {
           openshift.withCluster() {
             def currentUser = currentUser()
