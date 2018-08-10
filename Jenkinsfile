@@ -5,7 +5,9 @@ pipeline {
   stages {
     stage('Test init') {
       steps {
-        openshift.selector( 'dc', [ environment:'qe' ] ).delete()
+        script {
+          openshift.selector( 'dc', [ environment:'qe' ] ).delete()
+        }
       }
     }
   }
