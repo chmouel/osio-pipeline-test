@@ -22,8 +22,7 @@ pipeline {
               echo "Creating Bootstrap pipeline"
               openshift.create(
                 openshift.process(
-                  "-f", "osio-pipeline-build.yaml",
-                  "-p",  "MEMORY_LIMIT=600Mi"
+                  "-f", "osio-pipeline-build.yaml"
                 )
               )
             }
