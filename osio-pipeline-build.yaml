@@ -18,12 +18,8 @@ metadata:
     iconClass: icon-jenkins
     openshift.io/display-name: Pipeline Build Example
     tags: instant-app,jenkins
-  creationTimestamp: 2018-06-28T09:27:42Z
+  creationTimestamp: null
   name: jenkins-pipeline-example
-  namespace: openshift
-  resourceVersion: "330"
-  selfLink: /oapi/v1/namespaces/openshift/templates/jenkins-pipeline-example
-  uid: 823829d0-7ab5-11e8-8607-02722743cc97
 objects:
 - apiVersion: v1
   kind: BuildConfig
